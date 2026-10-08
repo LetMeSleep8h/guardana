@@ -127,7 +127,13 @@ def test_bash_commands(
 
 @pytest.mark.parametrize(
     "command",
-    ["git push origin main", "git -C . push origin main", "git -c x=y --no-pager push origin main"],
+    [
+        "git push origin main",
+        "git -C . push origin main",
+        "git -c x=y --no-pager push origin main",
+        "git push origin feature && git push origin main",
+        "git push origin feature; git push origin main",
+    ],
 )
 def test_a_push_to_main_is_refused_while_the_site_is_stale(
     monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str], command: str
