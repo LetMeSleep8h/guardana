@@ -148,9 +148,7 @@ def _push_matches_main(push: re.Match[str]) -> bool:
 
 
 def _pushes_main(command: str) -> bool:
-    # A compound command can push more than once (`git push origin feature &&
-    # git push origin main`); the first match stops at `&`/`;`/`|` and only
-    # saw the feature push. Check every push in the command.
+    # A compound command can push more than once; check every push.
     return any(
         _push_matches_main(push) for push in re.finditer(r"\bgit\s+push\b([^|;&]*)", command)
     )
